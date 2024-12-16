@@ -1,11 +1,11 @@
 const discord = require("discord.js");
+require("dotenv").config();
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const MODEL = "gemini-1.5-flash";
 const API_KEY = process.env.API_KEY;
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const ai = new GoogleGenerativeAI(API_KEY);
 const model = ai.getGenerativeModel({ model: MODEL });
-require("dotenv").config();
 
 const client = new discord.Client({
   intents: Object.keys(discord.GatewayIntentBits),
