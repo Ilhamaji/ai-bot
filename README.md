@@ -1,7 +1,7 @@
 # AI Discord Bot
 
 An intelligent and versatile Discord chatbot built with **JavaScript** and **Discord.js**. This bot integrates advanced AI models to provide real-time interaction, automated responses, and enhanced community engagement within your Discord server.
-Demo: [M AI](https://discord.com/oauth2/authorize?client_id=1308770920562823228)
+Demo: [AI M](https://discord.com/oauth2/authorize?client_id=1308770920562823228)
 
 ## 🚀 Features
 
