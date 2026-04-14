@@ -7,7 +7,7 @@ An intelligent and versatile Discord chatbot built with **JavaScript** and **Dis
   * **Real-time AI Interaction**: Natural and fluid conversations powered by [Insert AI Model, e.g., OpenAI/Gemini/Ollama].
   * **Contextual Awareness**: Remembers previous messages for more coherent and human-like interactions.
   * **Multi-Modal Support**: Ability to process text and images (depending on the integrated model).
-  * **Slash Commands**: Modern Discord integration using `/` commands for easy usage.
+  * **Slash Commands**: Modern Discord integration using `?` commands for easy usage.
   * **Highly Customizable**: Easily configurable prefixes, personality traits, and permission levels.
 
 ## 🛠️ Built With
@@ -65,9 +65,7 @@ nodemon index.js
 
 ### Example Commands
 
-  * `!ask [your question]` — Ask the AI a question (Prefix mode).
-  * `/chat [message]` — Start a conversation (Slash command mode).
-  * `/clear` — Clear the conversation history.
+  * `?[your question]` — Ask the AI a question (Prefix mode).
 
 ## ⚙️ Configuration
 
