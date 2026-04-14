@@ -1,4 +1,4 @@
-# <img src="[https://raw.githubusercontent.com/discordjs/discord.js/main/packages/discord.js/assets/logo.svg](https://www.google.com/search?q=https://raw.githubusercontent.com/discordjs/discord.js/main/packages/discord.js/assets/logo.svg)" alt="Discord.js Logo" width="36" height="36" align="top" /> AI Discord Bot
+# AI Discord Bot
 
 An intelligent and versatile Discord chatbot built with **JavaScript** and **Discord.js**. This bot integrates advanced AI models to provide real-time interaction, automated responses, and enhanced community engagement within your Discord server.
 
