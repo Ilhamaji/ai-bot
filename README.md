@@ -38,9 +38,10 @@ To host this bot locally or on a server, follow these steps:
     Create a `.env` file in the root directory and add your secret tokens:
 
     ```env
-    DISCORD_TOKEN=your_discord_bot_token
-    CLIENT_ID=your_discord_client_id
-    AI_API_KEY=your_ai_provider_key
+    API_KEY= //OpenRemote
+    GOOGLE_API_KEY= //Google
+    GROQ_API_KEY= //Groq
+    BOT_TOKEN= //Bot Token
     ```
 
 4.  **Register Slash Commands** (If applicable)
