@@ -14,7 +14,7 @@ An intelligent and versatile Discord chatbot built with **JavaScript** and **Dis
 
   * **Language**: [Node.js](https://nodejs.org/) (JavaScript)
   * **Library**: [Discord.js](https://discord.js.org/)
-  * **Environment**: [NPM / Yarn]
+  * **Environment**: NPM / Yarn
   * **AI Engine**: Gemini API , OpenAI API, Etc.
 
 ## 📦 Installation
