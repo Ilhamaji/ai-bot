@@ -19,7 +19,12 @@ const ONE_DAY_MS = 24 * 60 * 60 * 1000;
 const VISION_MODELS = [
   { provider: "google-native", name: "gemini-2.0-flash" },
   { provider: "openrouter", name: "google/gemini-2.0-flash-001" },
-  { provider: "openrouter", name: "meta-llama/llama-3.2-90b-vision-instruct:free" }
+  { provider: "openrouter", name: "meta-llama/llama-3.2-90b-vision-instruct:free" },
+  { provider: "google-native", name: "gemini-2.5-flash-lite" },
+  { provider: "google-native", name: "gemini-2.5-flash" },
+  { provider: "google-native", name: "gemini-3-flash-preview" },
+  { provider: "google-native", name: "gemini-3.1-flash-lite-preview" },  
+  { provider: "google-native", name: "gemini-2.5-pro" },
 ];
 
 const TEXT_MODELS = [    
@@ -47,6 +52,17 @@ const genAI = new GoogleGenerativeAI(GOOGLE_API_KEY);
 
 const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
+});
+
+client.on('ready', () => {
+    client.user.setPresence({
+        activities: [{ 
+            name: "Custom Status", 
+            state: "?(ask your question)", 
+            type: 4 
+        }],
+        status: 'online',
+    });
 });
 
 const sessions = new Map();
@@ -202,10 +218,12 @@ async function fetchWithFallback(messagesArray, isVisionContext) {
       }
 
     } catch (error) {
-      if (error.message.includes("429 Too Many Requests")) {
-         console.warn(`[⚠️] ${model.provider} failed: Quota Exceeded (429). Falling back...`);
+      // PERBAIKAN LOGGING: Menangkap 429 dari semua provider agar log lebih rapi
+      const errorMsg = error.message || "";
+      if (errorMsg.includes("429")) {
+         console.warn(`[⚠️] ${model.provider} (${model.name}) limit/kuota penuh (429). Melompat ke model berikutnya...`);
       } else {
-         console.warn(`[⚠️] ${model.provider} failed: ${error.message}`);
+         console.warn(`[⚠️] ${model.provider} (${model.name}) failed: ${errorMsg}`);
       }
       continue; 
     }
@@ -231,7 +249,10 @@ client.on("messageCreate", async (message) => {
     let userSession = sessions.get(sessionId);
     if (!userSession || (Date.now() - userSession.lastUpdated > ONE_DAY_MS)) {
       userSession = { 
-        messages: [{ role: "system", content: "You are a smart Discord assistant made by M. Always answer clearly." }], 
+        messages: [{ 
+            role: "system", 
+            content: "You are a smart Discord assistant made by M. Always answer clearly. CRITICAL INSTRUCTION: You MUST auto-detect the language used in the user's prompt and respond in that EXACT SAME language. If the user writes in English, reply in English. If the user writes in Indonesian, reply in Indonesian. Mirror their language completely." 
+        }], 
         lastUpdated: Date.now(),
         hasImageInHistory: false 
       };
@@ -304,7 +325,7 @@ client.on("messageCreate", async (message) => {
 
   } catch (error) {
     console.error(error);
-    await message.reply("```All providers are currently exhausted or unavailable. Please try again.```");
+    await message.reply("```Semua penyedia layanan (Providers) sedang sibuk atau tidak tersedia. Silakan coba lagi nanti.```");
   }
 });
 
