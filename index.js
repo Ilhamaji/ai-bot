@@ -51,18 +51,25 @@ const groq = new OpenAI({ baseURL: "https://api.groq.com/openai/v1", apiKey: GRO
 const genAI = new GoogleGenerativeAI(GOOGLE_API_KEY);
 
 const client = new Client({
-  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
+    intents: [
+        GatewayIntentBits.Guilds, 
+        GatewayIntentBits.GuildMessages, 
+        GatewayIntentBits.MessageContent
+    ],
+    // --- IMPLEMENTASI PERBAIKAN STATUS DI SINI ---
+    presence: {
+        status: 'online',
+        activities: [{
+            name: "Custom Status",
+            state: "?(ask your question)",
+            type: 4 // Type 4 adalah Custom Status
+        }]
+    }
 });
 
 client.on('ready', () => {
-    client.user.setPresence({
-        activities: [{ 
-            name: "Custom Status", 
-            state: "?(ask your question)", 
-            type: 4 
-        }],
-        status: 'online',
-    });
+    console.log(`[🚀] Bot is ready as ${client.user.tag}`);
+    console.log(`[📊] Status presence telah dikonfigurasi.`);
 });
 
 const sessions = new Map();
